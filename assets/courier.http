@@ -1,0 +1,24 @@
+### first location upsert request
+### date validasyonu var now beetween now+30
+POST {{host}}/api/v1/couriers/tracking/gorkem
+Content-Type: application/json
+
+{
+  "lat": 40.9923307,
+  "lng": 29.1244229,
+  "trackingEntryDate": "2025-05-16T12:54:00"
+}
+### second location upsert request
+### date validasyonu var now beetween now+30
+POST {{host}}/api/v1/couriers/tracking/gorkem
+Content-Type: application/json
+
+{
+  "lat": 40.9633000,
+  "lng": 29.0631000,
+  "trackingEntryDate": "2025-05-16T12:56:00"
+}
+
+### Get Distance
+GET {{host}}/api/v1/couriers/tracking-distance/gorkem
+Content-Type: application/json

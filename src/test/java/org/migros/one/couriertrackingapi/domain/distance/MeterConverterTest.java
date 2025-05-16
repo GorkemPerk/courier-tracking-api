@@ -1,0 +1,29 @@
+package org.migros.one.couriertrackingapi.domain.distance;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@ExtendWith(MockitoExtension.class)
+class MeterConverterTest {
+    @InjectMocks
+    private MeterConverter sut;
+
+    @Test
+    void convert_shouldReturnSameValue() {
+        Double input = 1500.0;
+        Double result = sut.convert(input);
+
+        assertEquals(1500.0, result);
+    }
+
+    @Test
+    void getUnit_shouldReturnMetersSymbol() {
+        String unit = sut.getUnit();
+        assertEquals("m", unit);
+    }
+
+}
