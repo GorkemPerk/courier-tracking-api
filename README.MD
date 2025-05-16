@@ -1,13 +1,13 @@
-# 🚚 Migros Courier Tracking API
+# 🚚 Courier Tracking API
 
-Courier Tracking API, Migros kuryelerinin lokasyonlarını takip eder, mağazalara belirli bir mesafeye yaklaştıklarında giriş kaydı oluşturur ve toplam seyahat mesafesini hesaplar. Uygulama, Spring Boot, PostgreSQL ve çeşitli tasarım desenleri kullanılarak geliştirilmiştir.
+Courier Tracking API, kuryelerinin lokasyonlarını takip eder, mağazalara belirli bir mesafeye yaklaştıklarında giriş kaydı oluşturur ve toplam seyahat mesafesini hesaplar. Uygulama, Spring Boot, PostgreSQL ve çeşitli tasarım desenleri kullanılarak geliştirilmiştir.
 
 ---
 
 ## 📦 Özellikler
 
 - 📍 Kurye lokasyonlarını kaydetme
-- 🏬 Kurye, bir Migros mağazasına 100 metre yaklaştığında giriş kaydı oluşturma
+- 🏬 Kurye, bir X mağazasına 100 metre yaklaştığında giriş kaydı oluşturma
 - ⏱ Aynı mağazaya 1 dakikadan kısa sürede yeniden giriş yapılmasını engelleme
 - 📏 Kuryenin toplam seyahat mesafesini hesaplama (Cosines/Haversine) bu algoritmaları google dan buldum :)
 - 🛠 Strateji & Factory & Singleton tasarım desenleri kullanımı
