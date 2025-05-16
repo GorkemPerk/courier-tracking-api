@@ -71,6 +71,7 @@ class CourierServiceTest {
 
         PageableStoreDTO pageableStoreDTO = PageableStoreDTO.builder()
                 .content(List.of(store1, store2))
+                .totalPage(1)
                 .build();
 
         when(storeService.getAllStores(any(PageableQuery.class))).thenReturn(pageableStoreDTO);

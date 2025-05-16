@@ -10,6 +10,7 @@ import org.migros.one.couriertrackingapi.domain.entity.Store;
 import org.migros.one.couriertrackingapi.domain.model.PageableQuery;
 import org.migros.one.couriertrackingapi.domain.model.command.CourierLocationCommand;
 import org.migros.one.couriertrackingapi.domain.model.dto.CourierLocationDTO;
+import org.migros.one.couriertrackingapi.domain.model.dto.PageableStoreDTO;
 import org.migros.one.couriertrackingapi.domain.model.dto.StoreDTO;
 import org.migros.one.couriertrackingapi.domain.model.dto.TotalTravelDistanceDTO;
 import org.migros.one.couriertrackingapi.domain.model.enums.CalculationType;
@@ -35,7 +36,7 @@ public class CourierService {
     private final ModelMapper mapper;
 
     public List<CourierLocationDTO> upsertLocation(CourierLocationCommand command, String courierId) {
-        List<CourierLocation> courierLocations = storeService.getAllStores(PageableQuery.builder().build()).getContent().stream()
+        List<CourierLocation> courierLocations = getStoreList().stream()
                 .map(store -> createCourierTracking(store, command, courierId))
                 .toList();
 
@@ -55,11 +56,25 @@ public class CourierService {
         return courierLocationDTO;
     }
 
+    private List<StoreDTO> getStoreList() {
+        List<StoreDTO> storeList = new ArrayList<>();
+        int totalPages;
+        int page = 1;
+        do {
+            PageableStoreDTO storePage = storeService.getAllStores(PageableQuery.builder().page(1).build());
+            storeList.addAll(storePage.getContent());
+
+            totalPages = storePage.getTotalPage();
+            page++;
+        } while (page < totalPages);
+        return storeList;
+    }
+
     private boolean isValidEntry(String courierId, CourierLocation courierLocation) {
         boolean isWithinDistanceThreshold = courierLocation.getDistance() <= appConfig.getMaxThreshold();
         boolean isTimeValid = courierLocationRepository
                 .findTopByCourierIdAndStoreIdOrderByTrackingEntryDateDesc(courierId, courierLocation.getStore().getId())
-                .map(last -> last.getTrackingEntryDate().isBefore(courierLocation.getTrackingEntryDate().minusMinutes(appConfig.getPeriodThreshold())))
+                .map(last -> last.getTrackingEntryDate().isAfter(courierLocation.getTrackingEntryDate().minusMinutes(appConfig.getPeriodThreshold())))
                 .orElse(true);
         return isWithinDistanceThreshold && isTimeValid;
     }

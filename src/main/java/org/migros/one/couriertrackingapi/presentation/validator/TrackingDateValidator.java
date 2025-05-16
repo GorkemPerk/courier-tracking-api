@@ -9,9 +9,8 @@ public class TrackingDateValidator implements ConstraintValidator<ValidTrackingD
     @Override
     public boolean isValid(LocalDateTime value, ConstraintValidatorContext context) {
         if (value == null) return false;
-
-        LocalDateTime now = LocalDateTime.now().withNano(0);
-        LocalDateTime maxTime = now.plusMinutes(30);
-        return (!value.isBefore(now)) && (!value.isAfter(maxTime));
+        LocalDateTime now = LocalDateTime.now().withSecond(0).withNano(0);
+        LocalDateTime maxTime = now.plusMinutes(1);
+        return !value.isBefore(now) && !value.isAfter(maxTime);
     }
 }
