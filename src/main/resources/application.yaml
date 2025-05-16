@@ -31,6 +31,7 @@ spring:
         connection:
           provider_disables_autocommit: true
   cache:
+    type: caffeine
     cache-names: storeCache
     caffeine:
       spec: maximumSize=50,expireAfterWrite=5m
