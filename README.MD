@@ -12,6 +12,7 @@ Courier Tracking API, kuryelerinin lokasyonlarını takip eder, mağazalara beli
 - 📏 Kuryenin toplam seyahat mesafesini hesaplama (Cosines/Haversine) bu algoritmaları google dan buldum :)
 - 🛠 Strateji & Factory & Singleton tasarım desenleri kullanımı
 - 🛠 Custom Validasyon kullanıldı
+- 🛠 Store dönerken in-memory Cache kullanıldı
 
 ---
 
